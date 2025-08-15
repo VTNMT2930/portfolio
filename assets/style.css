@@ -6,3 +6,65 @@
 /* .project-slide__info h2 {
     color: var(--t-per-bright-light) !important;
   } */
+
+/* ------------------------------------------------
+   Smooth scroll-reveal animations for animate-* classes
+   (Used across headline, cards, sections, tools, etc.)
+   If classes already exist in HTML, these styles make
+   them animate in smoothly when JS toggles styles.
+-------------------------------------------------- */
+.animate-in-up,
+.animate-headline,
+.animate-card-2,
+.animate-card-3,
+.animate-card-5 {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity var(--_animspeed-slow, 0.6s) var(--_animbezier, cubic-bezier(0.23, 0.65, 0.74, 1.09)),
+    transform var(--_animspeed-slow, 0.6s) var(--_animbezier, cubic-bezier(0.23, 0.65, 0.74, 1.09));
+  will-change: opacity, transform;
+}
+
+/* Slightly varied durations to create a natural stagger */
+.animate-card-2 {
+  transition-duration: 0.5s;
+}
+
+.animate-card-3 {
+  transition-duration: 0.65s;
+}
+
+.animate-card-5 {
+  transition-duration: 0.8s;
+}
+
+/* Rotation helper (used by rotating scroll button text) */
+.animate-rotation {
+  transform-origin: 50% 50%;
+  display: inline-block;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+
+  .animate-in-up,
+  .animate-headline,
+  .animate-card-2,
+  .animate-card-3,
+  .animate-card-5 {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
