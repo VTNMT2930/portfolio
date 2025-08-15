@@ -434,6 +434,26 @@ class FormManager {
     if (this.contactForm) {
       this.setupFormValidation();
       this.setupFormSubmission();
+      this.setupEmailJS();
+    }
+  }
+
+  setupEmailJS() {
+    try {
+      // Read config from data-attributes on the form for easy editing
+      const serviceId = this.contactForm.getAttribute('data-emailjs-service');
+      const templateId = this.contactForm.getAttribute('data-emailjs-template');
+      const templateAdminId = this.contactForm.getAttribute('data-emailjs-template-admin');
+      const toAdminAttr = this.contactForm.getAttribute('data-emailjs-to-admin');
+      const publicKey = this.contactForm.getAttribute('data-emailjs-public');
+
+      if (window.emailjs && publicKey) {
+        window.emailjs.init(publicKey);
+      }
+
+      this.emailConfig = { serviceId, templateId, templateAdminId, toAdminAttr, publicKey };
+    } catch (e) {
+      console.warn('EmailJS init skipped:', e);
     }
   }
 
@@ -529,15 +549,55 @@ class FormManager {
     submitButton.disabled = true;
 
     try {
-      // Simulate form submission (replace with actual endpoint)
-      await new Promise(resolve => setTimeout(resolve, 2000));
+      const formData = new FormData(this.contactForm);
+      const payload = {
+        from_name: formData.get('Name') || '',
+        from_email: formData.get('E-mail') || '',
+        company: formData.get('Company') || '',
+        phone: formData.get('Phone') || '',
+        message: formData.get('Message') || ''
+      };
 
-      // Show success message
+      // Resolve recipient email expected by EmailJS template (often variable name: to_email)
+      // Auto-reply recipient should be the user's email
+      payload.to_email = payload.from_email || '';
+
+      // Optional subject if template uses it
+      const subjectHidden = this.contactForm.querySelector('input[name="form_subject"]')?.value;
+      if (subjectHidden) payload.subject = subjectHidden;
+
+      if (window.emailjs && this.emailConfig?.serviceId && this.emailConfig?.templateId) {
+        // 1) Send auto-reply to the user
+        await window.emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateId, payload);
+
+        // 2) Send notification to admin (optional if templateAdminId provided)
+        if (this.emailConfig?.templateAdminId) {
+          const adminEmail = this.emailConfig?.toAdminAttr || this.contactForm.querySelector('input[name="admin_email"]')?.value;
+          const notifyPayload = {
+            to_email: adminEmail || 'nhantrung297@gmail.com',
+            from_name: payload.from_name,
+            from_email: payload.from_email,
+            company: payload.company,
+            phone: payload.phone,
+            message: payload.message,
+            subject: this.contactForm.querySelector('input[name="form_subject"]')?.value || 'New contact message'
+          };
+          await window.emailjs.send(this.emailConfig.serviceId, this.emailConfig.templateAdminId, notifyPayload);
+        }
+      } else {
+        // Fallback: simulate if EmailJS not configured yet
+        await new Promise(resolve => setTimeout(resolve, 1200));
+      }
+
       this.showSuccessMessage();
       this.contactForm.reset();
 
     } catch (error) {
-      // Show error message
+      console.error('Email send failed:', error);
+      // Surface EmailJS error text if available
+      if (error?.text) {
+        alert(`EmailJS error: ${error.text}`);
+      }
       this.showErrorMessage();
     } finally {
       // Reset button
