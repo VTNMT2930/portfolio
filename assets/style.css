@@ -7,6 +7,11 @@
     color: var(--t-per-bright-light) !important;
   } */
 
+/* Global smooth scrolling when html has class scroll-smooth */
+html.scroll-smooth {
+  scroll-behavior: smooth;
+}
+
 /* ------------------------------------------------
    Smooth scroll-reveal animations for animate-* classes
    (Used across headline, cards, sections, tools, etc.)
@@ -24,6 +29,16 @@
     opacity var(--_animspeed-slow, 0.6s) var(--_animbezier, cubic-bezier(0.23, 0.65, 0.74, 1.09)),
     transform var(--_animspeed-slow, 0.6s) var(--_animbezier, cubic-bezier(0.23, 0.65, 0.74, 1.09));
   will-change: opacity, transform;
+}
+
+/* Visible state toggled by IntersectionObserver to allow replays */
+.is-visible.animate-in-up,
+.is-visible.animate-headline,
+.is-visible.animate-card-2,
+.is-visible.animate-card-3,
+.is-visible.animate-card-5 {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Slightly varied durations to create a natural stagger */

@@ -206,37 +206,36 @@ class AnimationManager {
   }
 
   setupScrollAnimations() {
-    // Animate elements on scroll
-    const animateOnScroll = () => {
-      const elements = document.querySelectorAll('.animate-in-up, .animate-headline, .animate-card-2, .animate-card-3, .animate-card-5');
+    // Use IntersectionObserver so animations can replay when elements re-enter viewport
+    const elements = document.querySelectorAll(
+      '.animate-in-up, .animate-headline, .animate-card-2, .animate-card-3, .animate-card-5'
+    );
 
-      elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
+    if (!('IntersectionObserver' in window)) {
+      // Fallback to immediate reveal
+      elements.forEach(el => el.classList.add('is-visible'));
+      return;
+    }
 
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.style.opacity = '1';
-          element.style.transform = 'translateY(0px)';
-        }
-      });
-    };
-
-    // Throttled scroll handler
-    let ticking = false;
-    const scrollHandler = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          animateOnScroll();
-          ticking = false;
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          } else {
+            // Remove visibility so animation can replay next time
+            entry.target.classList.remove('is-visible');
+          }
         });
-        ticking = true;
+      },
+      {
+        root: null,
+        threshold: 0.15,
+        rootMargin: '0px 0px -10% 0px'
       }
-    };
+    );
 
-    window.addEventListener('scroll', scrollHandler, { passive: true });
-
-    // Initial animation check
-    animateOnScroll();
+    elements.forEach(el => observer.observe(el));
   }
 
   setupCustomAnimations() {
