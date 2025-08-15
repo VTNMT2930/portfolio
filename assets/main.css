@@ -199,6 +199,34 @@
   }
 }
 
+/* Explicit theme switching via html.dark (matches screenshot-style dark palette) */
+html.dark {
+  color-scheme: dark;
+  --base: var(--base--dark);
+  --base-tint: var(--base-tint--dark);
+  --base-shade: var(--base-shade--dark);
+  --accent: var(--accent--dark);
+  --secondary: var(--secondary--dark);
+  --secondary-rgba: var(--secondary-rgba--dark);
+  --stroke-controls: var(--stroke-controls--dark);
+  --stroke-controls-neutral: var(--stroke-controls-neutral--dark);
+  --stroke-elements: var(--stroke-elements--dark);
+  --t-bright: var(--t-bright--dark);
+  --t-medium: var(--t-medium--dark);
+  --t-muted: var(--t-muted--dark);
+  --t-accent: var(--t-accent--dark);
+  --t-secondary: var(--t-secondary--dark);
+  --t-disabled: var(--t-disabled--dark);
+  --t-placeholder: var(--t-placeholder--dark);
+  --base-opp: var(--base-opp--dark);
+  --t-opp-bright: var(--t-opp-bright--dark);
+  --t-opp-medium: var(--t-opp-medium--dark);
+  --t-opp-muted: var(--t-opp-muted--dark);
+  --gradient-one: var(--gradient-one--dark);
+  --gradient-two: var(--gradient-two--dark);
+  --gradient-three: var(--gradient-three--dark);
+}
+
 [color-scheme=light] {
   --base: var(--base--light);
   --base-tint: var(--base-tint--light);
@@ -5173,7 +5201,8 @@ form textarea:required:valid {
   transform: translateY(-2px);
 }
 
-.project-btn i, .project-btn span {
+.project-btn i,
+.project-btn span {
   font-size: 1.4rem;
   color: var(--t-per-bright-light);
 }
