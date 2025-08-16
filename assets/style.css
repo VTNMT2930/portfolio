@@ -60,6 +60,10 @@ html.scroll-smooth {
   display: inline-block;
 }
 
+#resume > .content_block {
+  margin-bottom: 0 !important;
+}
+
 @keyframes rotation {
   from {
     transform: rotate(0deg);
