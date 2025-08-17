@@ -1179,6 +1179,10 @@ class AlexWalkerPortfolio {
       this.managers.gallery = new GalleryManager();
       this.managers.slider = new SliderManager();
 
+      // Initialize language and CV handlers last so DOM exists
+      this.setupI18n();
+      this.setupCvDropdown();
+
       // App is ready
       this.onAppReady();
 
@@ -1198,6 +1202,427 @@ class AlexWalkerPortfolio {
     document.dispatchEvent(appReadyEvent);
 
     console.log('🎉 Vo Trung Nhan Portfolio initialized successfully!');
+  }
+
+  setupI18n() {
+    const DEFAULT_LANG = 'vi';
+    const SUPPORTED = ['vi', 'en'];
+
+    const messages = {
+      vi: {
+        'menu.home': 'Trang Chủ',
+        'menu.portfolio': 'Dự Án',
+        'menu.about': 'Về Tôi',
+        'menu.resume': 'Học Vấn',
+        'menu.contact': 'Liên Hệ',
+        'cta.chat': 'Trò Chuyện',
+        'intro.meet': "Hãy gặp gỡ!",
+        'intro.title': 'Võ Trung Nhân\nIntern Backend Developer.',
+        'intro.viewProjects': 'Xem Dự Án',
+        'intro.downloadCv': 'Tải CV',
+        'home.rotating': 'Cuộn xuống để xem thêm * Cuộn xuống để xem thêm * ',
+
+        'avatar.cta': 'Cùng Hợp Tác!',
+        'avatar.major.label': 'Chuyên ngành:',
+        'avatar.major.value': 'Công nghệ kỹ thuật phần mềm',
+        'avatar.address.label': 'Địa chỉ:',
+        'avatar.address.value': 'Hồ Chí Minh, Việt Nam',
+
+        'portfolio.subtitle': 'Dự Án',
+        'portfolio.title': 'Dự án cá nhân',
+        'portfolio.1.title': 'HỆ THỐNG TMĐT TEMPLATE SHOP',
+        'portfolio.1.desc': 'Chịu trách nhiệm thiết kế, phát triển và triển khai toàn bộ hệ thống cho một website thương mại điện tử, từ giao diện người dùng đến logic nghiệp vụ phía server.',
+        'portfolio.2.title': 'WEBSITE GIỚI THIỆU CÔNG TY NỘI THẤT ĐÌNH VĂN',
+        'portfolio.2.desc': 'Thiết kế và phát triển website giới thiệu sản phẩm và dịch vụ của công ty nội thất, tập trung vào giao diện responsive và trải nghiệm người dùng.',
+        'portfolio.3.title': 'HỆ THỐNG RÚT GỌN URL',
+        'portfolio.3.desc': 'Xây dựng hệ thống API cho phép người dùng rút gọn các URL dài thành đường dẫn ngắn gọn, duy nhất. Thiết kế cơ sở dữ liệu với PostgreSQL để lưu trữ và quản lý hiệu quả các cặp URL. Sử dụng Docker để container hóa ứng dụng, đảm bảo tính nhất quán khi triển khai.',
+        'portfolio.4.title': 'TRANG WEB PORTFOLIO CÁ NHÂN',
+        'portfolio.4.desc': 'Phát triển trang web portfolio cá nhân để giới thiệu các dự án, kỹ năng và thông tin chuyên môn. Thiết kế tập trung vào UI sạch sẽ, hiện đại và UX responsive.',
+
+        'about.subtitle': 'Về Bản Thân',
+        'about.title': 'Mục tiêu nghề nghiệp',
+        'about.p1': 'Là sinh viên năm cuối chuyên ngành Công nghệ kỹ thuật phần mềm, em có định hướng phát triển sự nghiệp lâu dài với vị trí lập trình viên Backend. Với kiến thức nền tảng vững chắc về Java, Spring Boot và cơ sở dữ liệu, kết hợp với kinh nghiệm thực tiễn qua các dự án cá nhân, em mong muốn được áp dụng kiến thức vào môi trường làm việc chuyên nghiệp.',
+        'about.p2': 'Em hướng tới mục tiêu không ngừng học hỏi, đóng góp và phát triển để trở thành một Backend Developer vững mạnh, có khả năng xây dựng và tối ưu hóa các hệ thống phần mềm phức tạp.',
+
+        'about.info.fullname.label': 'Họ tên',
+        'about.info.phone.label': 'Điện thoại',
+        'about.info.email.label': 'Email',
+        'about.info.address.label': 'Địa chỉ',
+
+        'services.1.title': 'Backend\nDevelopment',
+        'services.1.text': 'Xây dựng RESTful API, logic nghiệp vụ và bảo mật hệ thống bằng Spring Security.',
+        'services.2.title': 'Frontend\nDevelopment',
+        'services.2.text': 'Xây dựng giao diện người dùng đáp ứng (responsive) và có tính tương tác cao.',
+        'services.3.title': 'Database\nManagement',
+        'services.3.text': 'Thiết kế và làm việc với CSDL quan hệ, sử dụng Spring Data JPA để tương tác.',
+        'services.4.title': 'Tools &\nDeployment',
+        'services.4.text': 'Sử dụng Git để quản lý phiên bản. Đóng gói và triển khai ứng dụng với Docker.',
+
+        'resume.subtitle': 'Học Vấn',
+        'resume.title': 'Học vấn',
+        'resume.edu1.title': 'Công nghệ kỹ thuật phần mềm',
+        'resume.edu1.school': 'Trường Đại học Nguyễn Tất Thành',
+        'resume.edu1.desc': 'Là sinh viên năm cuối với điểm GPA hiện tại là 3.54/4.0, tập trung vào phát triển ứng dụng web và hệ thống backend.',
+        'resume.tools.title': 'Công nghệ và công cụ',
+
+        'achievements.1': 'Khách hàng hài lòng',
+        'achievements.2': 'Kinh nghiệm (năm)',
+        'achievements.3': 'Dự án hoàn thành',
+
+        'contact.title': 'Liên Hệ',
+        'contact.subtitle': 'Hãy cùng nhau tạo nên điều tuyệt vời!',
+        'contact.sent.title': 'Đã gửi thành công!',
+        'contact.sent.text': 'Cảm ơn bạn đã gửi tin nhắn. Tôi sẽ trả lời sớm nhất có thể.',
+        'contact.placeholder.name': 'Họ và tên*',
+        'contact.placeholder.company': 'Tên công ty',
+        'contact.placeholder.email': 'Địa chỉ email*',
+        'contact.placeholder.phone': 'Số điện thoại*',
+        'contact.placeholder.message': 'Nội dung tin nhắn*',
+        'contact.send': 'Gửi tin nhắn',
+        'teaser.text': 'Muốn tìm hiểu thêm về tôi, chia sẻ về dự án của bạn hoặc chỉ đơn giản là chào hỏi? <a class="text-link-bold" href="{EMAIL}" target="_self">Hãy liên hệ với tôi</a> và tôi sẽ phản hồi sớm nhất có thể.',
+        'contactLines.address': 'Địa chỉ',
+        'contactLines.phone': 'Điện thoại',
+        'contactLines.email': 'Email',
+
+        'modal.tech': 'Công nghệ:',
+        'modal.time': 'Thời gian:',
+        'modal.role': 'Vai trò:',
+        'modal.demo': 'Xem Demo',
+        'modal.github': 'GitHub'
+      },
+      en: {
+        'menu.home': 'Home',
+        'menu.portfolio': 'Portfolio',
+        'menu.about': 'About',
+        'menu.resume': 'Resume',
+        'menu.contact': 'Contact',
+        'cta.chat': 'Chat',
+        'intro.meet': "Let's meet!",
+        'intro.title': 'Vo Trung Nhan\nIntern Backend Developer.',
+        'intro.viewProjects': 'View Projects',
+        'intro.downloadCv': 'Download CV',
+        'home.rotating': 'Scroll down to see more * Scroll down to see more * ',
+
+        'avatar.cta': "Let's Collaborate!",
+        'avatar.major.label': 'Major:',
+        'avatar.major.value': 'Software Engineering Technology',
+        'avatar.address.label': 'Address:',
+        'avatar.address.value': 'Ho Chi Minh City, Vietnam',
+
+        'portfolio.subtitle': 'Portfolio',
+        'portfolio.title': 'Personal projects',
+        'portfolio.1.title': 'E-COMMERCE SYSTEM TEMPLATE SHOP',
+        'portfolio.1.desc': 'Designed, developed, and deployed a full-stack e-commerce website, from UI to server-side business logic.',
+        'portfolio.2.title': 'FURNITURE COMPANY WEBSITE',
+        'portfolio.2.desc': 'Designed and developed a company website to showcase products and services with responsive UI and UX focus.',
+        'portfolio.3.title': 'URL SHORTENER SYSTEM',
+        'portfolio.3.desc': 'Built APIs to shorten long URLs to unique short links. Designed the database with PostgreSQL and containerized the app with Docker.',
+        'portfolio.4.title': 'PERSONAL PORTFOLIO WEBSITE',
+        'portfolio.4.desc': 'Developed a personal portfolio website to showcase projects, skills, and expertise with a clean UI and responsive UX.',
+
+        'about.subtitle': 'About Me',
+        'about.title': 'Career Objective',
+        'about.p1': 'I am a final-year student majoring in Software Engineering Technology, aiming to build a long-term career as a Backend Developer. With a solid foundation in Java, Spring Boot, and databases, combined with hands-on experience from personal projects, I am eager to contribute in a professional environment.',
+        'about.p2': 'I continuously strive to learn, contribute, and grow into a strong Backend Developer capable of building and optimizing complex software systems.',
+
+        'about.info.fullname.label': 'Full name',
+        'about.info.phone.label': 'Phone',
+        'about.info.email.label': 'Email',
+        'about.info.address.label': 'Address',
+
+        'services.1.title': 'Backend\nDevelopment',
+        'services.1.text': 'Build RESTful APIs, business logic, and secure systems with Spring Security.',
+        'services.2.title': 'Frontend\nDevelopment',
+        'services.2.text': 'Build responsive, highly interactive user interfaces.',
+        'services.3.title': 'Database\nManagement',
+        'services.3.text': 'Design and work with relational databases, using Spring Data JPA for data access.',
+        'services.4.title': 'Tools &\nDeployment',
+        'services.4.text': 'Use Git for version control. Package and deploy applications with Docker.',
+
+        'resume.subtitle': 'Resume',
+        'resume.title': 'Education',
+        'resume.edu1.title': 'Software Engineering Technology',
+        'resume.edu1.school': 'Nguyen Tat Thanh University',
+        'resume.edu1.desc': 'Final-year student with a GPA of 3.54/4.0, focusing on web apps and backend systems.',
+        'resume.tools.title': 'Technologies and tools',
+
+        'achievements.1': 'Happy clients',
+        'achievements.2': 'Years of experience',
+        'achievements.3': 'Projects done',
+
+        'contact.title': 'Contact',
+        'contact.subtitle': "Let's create something great together!",
+        'contact.sent.title': 'Sent successfully!',
+        'contact.sent.text': "Thanks for your message. I'll get back to you as soon as possible.",
+        'contact.placeholder.name': 'Full name*',
+        'contact.placeholder.company': 'Company',
+        'contact.placeholder.email': 'Email address*',
+        'contact.placeholder.phone': 'Phone number*',
+        'contact.placeholder.message': 'Your message*',
+        'contact.send': 'Send message',
+        'teaser.text': 'Want to learn more about me, share your project, or just say hello? <a class="text-link-bold" href="{EMAIL}" target="_self">Contact me</a> and I will reply as soon as possible.',
+        'contactLines.address': 'Address',
+        'contactLines.phone': 'Phone',
+        'contactLines.email': 'Email',
+
+        'modal.tech': 'Tech stack:',
+        'modal.time': 'Duration:',
+        'modal.role': 'Role:',
+        'modal.demo': 'View Demo',
+        'modal.github': 'GitHub'
+      }
+    };
+
+    const applyLanguage = (lang) => {
+      const dict = messages[lang] || messages[DEFAULT_LANG];
+      // Update elements explicitly where safer than sprinkling many data-i18n attributes
+      const map = [
+        ['.menu__item:nth-child(1) .menu__caption', 'menu.home'],
+        ['.menu__item:nth-child(2) .menu__caption', 'menu.portfolio'],
+        ['.menu__item:nth-child(3) .menu__caption', 'menu.about'],
+        ['.menu__item:nth-child(4) .menu__caption', 'menu.resume'],
+        ['.menu__item:nth-child(5) .menu__caption', 'menu.contact'],
+        ['#headline .headline__subtitle span', 'intro.meet'],
+        ['#notify-trigger .trigger__caption', 'cta.chat'],
+        ['#headline .headline__btnholder a:first-child .btn-caption', 'intro.viewProjects'],
+        ['.cv-dropdown__toggle .btn-caption', 'intro.downloadCv'],
+        ['section#contact .section-title p span', 'contact.title'],
+        ['section#contact .section-title h2', 'contact.subtitle'],
+        ['#contact form button .btn-caption', 'contact.send']
+      ];
+
+      map.forEach(([selector, key]) => {
+        const el = document.querySelector(selector);
+        if (el && dict[key]) el.textContent = dict[key];
+      });
+
+      // Headline title (supports line break)
+      const titleEl = document.querySelector('#headline .headline__title');
+      if (titleEl && dict['intro.title']) titleEl.innerHTML = dict['intro.title'].replace(/\n/g, '<br>');
+
+      // Rotating text
+      const rotateText = document.querySelector('#home textPath');
+      if (rotateText && dict['home.rotating']) rotateText.textContent = dict['home.rotating'];
+
+      // Avatar CTA button
+      const avatarCta = document.querySelector('.avatar__btnholder .btn .btn-caption');
+      if (avatarCta && dict['avatar.cta']) avatarCta.textContent = dict['avatar.cta'];
+
+      // Avatar info lines (major, address)
+      const avatarBlocks = document.querySelectorAll('#avatar .avatar__block h6');
+      if (avatarBlocks && avatarBlocks.length >= 2) {
+        const major = avatarBlocks[0];
+        const address = avatarBlocks[1];
+        if (major && dict['avatar.major.label'] && dict['avatar.major.value']) {
+          major.innerHTML = `<small class="top">${dict['avatar.major.label']}</small> ${dict['avatar.major.value']}`;
+        }
+        if (address && dict['avatar.address.label'] && dict['avatar.address.value']) {
+          address.innerHTML = `<small class="top">${dict['avatar.address.label']}</small> ${dict['avatar.address.value']}`;
+        }
+      }
+
+      // Portfolio headings
+      const pSubtitle = document.querySelector('#portfolio .h2__subtitle span');
+      if (pSubtitle && dict['portfolio.subtitle']) pSubtitle.textContent = dict['portfolio.subtitle'];
+      const pTitle = document.querySelector('#portfolio .h2__title');
+      if (pTitle && dict['portfolio.title']) pTitle.textContent = dict['portfolio.title'];
+      const projTitles = [
+        dict['portfolio.1.title'],
+        dict['portfolio.2.title'],
+        dict['portfolio.3.title'],
+        dict['portfolio.4.title']
+      ];
+      const projDescs = [
+        dict['portfolio.1.desc'],
+        dict['portfolio.2.desc'],
+        dict['portfolio.3.desc'],
+        dict['portfolio.4.desc']
+      ];
+      document.querySelectorAll('#portfolio figure .gallery__descr h5').forEach((h5, idx) => {
+        if (projTitles[idx]) h5.textContent = projTitles[idx];
+      });
+      document.querySelectorAll('#portfolio figure .gallery__descr p.small').forEach((p, idx) => {
+        if (projDescs[idx]) p.textContent = projDescs[idx];
+      });
+
+      // About section
+      const aboutSub = document.querySelector('#about .section-grid-title .h2__subtitle span');
+      if (aboutSub && dict['about.subtitle']) aboutSub.textContent = dict['about.subtitle'];
+      const aboutTitle = document.querySelector('#about .section-grid-title .h2__title');
+      if (aboutTitle && dict['about.title']) aboutTitle.textContent = dict['about.title'];
+      const aboutP = document.querySelectorAll('#about .about-descr__text');
+      if (aboutP[0] && dict['about.p1']) aboutP[0].textContent = dict['about.p1'];
+      if (aboutP[1] && dict['about.p2']) aboutP[1].textContent = dict['about.p2'];
+
+      // About info labels
+      const infoItems = document.querySelectorAll('#about .about-info .about-info__item h6');
+      infoItems.forEach(h6 => {
+        const small = h6.querySelector('small.top');
+        if (!small) return;
+        const label = small.textContent.trim();
+        if (/^Họ tên/i.test(label) && dict['about.info.fullname.label']) small.textContent = dict['about.info.fullname.label'];
+        if (/^Điện thoại/i.test(label) && dict['about.info.phone.label']) small.textContent = dict['about.info.phone.label'];
+        if (/^Email/i.test(label) && dict['about.info.email.label']) small.textContent = dict['about.info.email.label'];
+        if (/^Địa chỉ|Address/i.test(label) && dict['about.info.address.label']) small.textContent = dict['about.info.address.label'];
+      });
+
+      // Services cards
+      const serviceTitles = document.querySelectorAll('.cards__card .cards__title');
+      const serviceTexts = document.querySelectorAll('.cards__card .cards__text');
+      const sTitles = [dict['services.1.title'], dict['services.2.title'], dict['services.3.title'], dict['services.4.title']];
+      const sTexts = [dict['services.1.text'], dict['services.2.text'], dict['services.3.text'], dict['services.4.text']];
+      serviceTitles.forEach((el, idx) => { if (sTitles[idx]) el.innerHTML = sTitles[idx].replace(/\n/g, '<br>'); });
+      serviceTexts.forEach((el, idx) => { if (sTexts[idx]) el.textContent = sTexts[idx]; });
+
+      // Resume
+      const resumeSub = document.querySelector('#resume .content__block.block-large .h2__subtitle span');
+      if (resumeSub && dict['resume.subtitle']) resumeSub.textContent = dict['resume.subtitle'];
+      const resumeTitle = document.querySelector('#resume .content__block.block-large + .content__block .h2__title');
+      if (resumeTitle && dict['resume.title']) resumeTitle.textContent = dict['resume.title'];
+      const eduTitle = document.querySelector('#resume .resume-lines__title');
+      if (eduTitle && dict['resume.edu1.title']) eduTitle.textContent = dict['resume.edu1.title'];
+      const eduSchool = document.querySelector('#resume .resume-lines__source a');
+      if (eduSchool && dict['resume.edu1.school']) eduSchool.textContent = dict['resume.edu1.school'];
+      const eduDesc = document.querySelector('#resume .resume-lines__descr');
+      if (eduDesc && dict['resume.edu1.desc']) eduDesc.textContent = dict['resume.edu1.desc'];
+      const toolsTitle = document.querySelector('#resume .section-h3 .h2__title');
+      if (toolsTitle && dict['resume.tools.title']) toolsTitle.textContent = dict['resume.tools.title'];
+
+      // Achievements
+      const achTexts = document.querySelectorAll('.achievements__card .achievements__descr');
+      const achMap = [dict['achievements.1'], dict['achievements.2'], dict['achievements.3']];
+      achTexts.forEach((el, idx) => { if (achMap[idx]) el.textContent = achMap[idx]; });
+
+      // Contact placeholders
+      const nameInput = document.querySelector('#contact-form input[name="Name"]');
+      const companyInput = document.querySelector('#contact-form input[name="Company"]');
+      const emailInput = document.querySelector('#contact-form input[name="E-mail"]');
+      const phoneInput = document.querySelector('#contact-form input[name="Phone"]');
+      const messageInput = document.querySelector('#contact-form textarea[name="Message"]');
+      if (nameInput && dict['contact.placeholder.name']) nameInput.setAttribute('placeholder', dict['contact.placeholder.name']);
+      if (companyInput && dict['contact.placeholder.company']) companyInput.setAttribute('placeholder', dict['contact.placeholder.company']);
+      if (emailInput && dict['contact.placeholder.email']) emailInput.setAttribute('placeholder', dict['contact.placeholder.email']);
+      if (phoneInput && dict['contact.placeholder.phone']) phoneInput.setAttribute('placeholder', dict['contact.placeholder.phone']);
+      if (messageInput && dict['contact.placeholder.message']) messageInput.setAttribute('placeholder', dict['contact.placeholder.message']);
+
+      // Contact reply texts
+      const replyTitle = document.querySelector('.form__reply .reply__title');
+      if (replyTitle && dict['contact.sent.title']) replyTitle.textContent = dict['contact.sent.title'];
+      const replyText = document.querySelector('.form__reply .reply__text');
+      if (replyText && dict['contact.sent.text']) replyText.textContent = dict['contact.sent.text'];
+
+      // Teaser paragraph (keep anchor href)
+      const teaser = document.querySelector('.teaser__text');
+      if (teaser && dict['teaser.text']) {
+        const link = teaser.querySelector('a');
+        const href = link ? link.getAttribute('href') : 'mailto:nhantrung297@gmail.com?subject=Message%20from%20your%20site';
+        teaser.innerHTML = dict['teaser.text'].replace('{EMAIL}', href);
+      }
+
+      // Contact lines
+      const contactLines = document.querySelectorAll('.contact-lines__data .contact-lines__title');
+      if (contactLines[0] && dict['contactLines.address']) contactLines[0].textContent = dict['contactLines.address'];
+      if (contactLines[1] && dict['contactLines.phone']) contactLines[1].textContent = dict['contactLines.phone'];
+      if (contactLines[2] && dict['contactLines.email']) contactLines[2].textContent = dict['contactLines.email'];
+
+      // Project modal labels and buttons
+      document.querySelectorAll('.project-slide__details .project-detail .detail-label').forEach(label => {
+        const txt = label.textContent.trim();
+        if (/^Công nghệ:|^Tech stack:/i.test(txt) && dict['modal.tech']) label.textContent = dict['modal.tech'];
+        if (/^Thời gian:|^Duration:/i.test(txt) && dict['modal.time']) label.textContent = dict['modal.time'];
+        if (/^Vai trò:|^Role:/i.test(txt) && dict['modal.role']) label.textContent = dict['modal.role'];
+      });
+      document.querySelectorAll('.project-slide__actions .project-btn').forEach(btn => {
+        const span = btn.querySelector('span');
+        if (!span) return;
+        if (btn.classList.contains('project-btn--primary') && dict['modal.demo']) span.textContent = dict['modal.demo'];
+        if (btn.classList.contains('project-btn--secondary') && dict['modal.github']) span.textContent = dict['modal.github'];
+      });
+
+      // Project modal titles and descriptions (sync with portfolio mappings)
+      const modalSlides = document.querySelectorAll('.project-modal__slides .project-slide');
+      modalSlides.forEach((slide, idx) => {
+        const title = slide.querySelector('.project-slide__title');
+        const desc = slide.querySelector('.project-slide__description');
+        const tKey = `portfolio.${idx + 1}.title`;
+        const dKey = `portfolio.${idx + 1}.desc`;
+        if (title && dict[tKey]) title.textContent = dict[tKey];
+        if (desc && dict[dKey]) desc.textContent = dict[dKey];
+      });
+
+      const langSwitcher = document.getElementById('lang-switcher');
+      if (langSwitcher) {
+        const label = langSwitcher.querySelector('.lang-label');
+        if (label) label.textContent = lang.toUpperCase();
+      }
+      document.documentElement.setAttribute('lang', lang === 'en' ? 'en' : 'vi');
+    };
+
+    const saved = localStorage.getItem('lang');
+    const initial = SUPPORTED.includes(saved || '') ? saved : DEFAULT_LANG;
+    applyLanguage(initial);
+
+    const switcher = document.getElementById('lang-switcher');
+    if (switcher) {
+      switcher.addEventListener('click', () => {
+        const current = localStorage.getItem('lang') || initial;
+        const next = current === 'vi' ? 'en' : 'vi';
+        localStorage.setItem('lang', next);
+        applyLanguage(next);
+      });
+    }
+  }
+
+  setupCvDropdown() {
+    // Ensure links target the correct files and still work if custom files are missing
+    const viHref = 'assets/CV_Vietnamese.pdf';
+    const enHref = 'assets/CV_English.pdf';
+
+    document.querySelectorAll('.cv-dropdown').forEach(dropdown => {
+      const viLink = dropdown.querySelector('.cv-option[data-lang="vi"]');
+      const enLink = dropdown.querySelector('.cv-option[data-lang="en"]');
+      if (viLink) viLink.setAttribute('href', viHref);
+      if (enLink) enLink.setAttribute('href', enHref);
+    });
+
+    // Optional: graceful fallback to existing CV if custom files are absent
+    const fallback = 'assets/CV_VoTrungNhan.pdf';
+    const testImage = (url) => new Promise(resolve => {
+      // Use HEAD via fetch; if blocked, resolve true and let browser handle 404
+      fetch(url, { method: 'HEAD' }).then(res => resolve(res.ok)).catch(() => resolve(false));
+    });
+
+    Promise.all([testImage(viHref), testImage(enHref)]).then(([hasVi, hasEn]) => {
+      document.querySelectorAll('.cv-dropdown').forEach(dropdown => {
+        const viLink = dropdown.querySelector('.cv-option[data-lang="vi"]');
+        const enLink = dropdown.querySelector('.cv-option[data-lang="en"]');
+        if (viLink && !hasVi) viLink.setAttribute('href', fallback);
+        if (enLink && !hasEn) enLink.setAttribute('href', fallback);
+      });
+    });
+
+    // Prevent hash jump and manage open state for the Headline dropdown specifically
+    const headlineDropdown = document.querySelector('.headline__btnholder .cv-dropdown');
+    if (headlineDropdown) {
+      const toggle = headlineDropdown.querySelector('.cv-dropdown__toggle');
+      if (toggle) {
+        toggle.addEventListener('click', (e) => {
+          e.preventDefault();
+        });
+      }
+      // Add JS hover assist to keep menu open when moving the mouse
+      let hoverTimer;
+      const openClass = 'is-open';
+      const open = () => {
+        clearTimeout(hoverTimer);
+        headlineDropdown.classList.add(openClass);
+      };
+      const close = () => {
+        hoverTimer = setTimeout(() => headlineDropdown.classList.remove(openClass), 120);
+      };
+      headlineDropdown.addEventListener('mouseenter', open);
+      headlineDropdown.addEventListener('mouseleave', close);
+    }
   }
 }
 

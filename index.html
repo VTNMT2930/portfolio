@@ -116,6 +116,10 @@
         <em></em>
         <i class="ph-bold ph-moon-stars"></i>
       </button>
+      <button id="lang-switcher" class="header__switcher btn" type="button" aria-label="language">
+        <span class="lang-label">VI</span>
+        <i class="ph fw-bold ph-translate"></i>
+      </button>
       <a id="notify-trigger" class="header__trigger btn"
         href="mailto:nhantrung297@gmail.com?subject=Message%20from%20your%20site">
         <span class="trigger__caption">Trò Chuyện</span>
@@ -251,11 +255,20 @@
               <span class="btn-caption">Xem Dự Án</span></span>
               <i class="ph fw-bold ph-squares-four"></i>
             </a>
-            <a class="btn mobile-vertical btn-default btn-hover btn-hover-outline-mobile animate-headline"
-              href="assets/CV_VoTrungNhan.pdf" download="CV_VoTrungNhan.pdf">
-              <span class="btn-caption">Tải CV</span>
-              <i class="ph fw-bold ph-download-simple"></i>
-            </a>
+            <div class="cv-dropdown mobile-vertical animate-headline">
+              <a class="btn btn-default btn-hover btn-hover-outline-mobile cv-dropdown__toggle" href="#cv">
+                <span class="btn-caption">Tải CV</span>
+                <i class="ph fw-bold ph-download-simple"></i>
+              </a>
+              <div class="cv-dropdown__menu">
+                <a class="cv-option" data-lang="vi" href="assets/CV_Vietnamese.pdf" download>
+                  Vietnamese
+                </a>
+                <a class="cv-option" data-lang="en" href="assets/CV_English.pdf" download>
+                  English
+                </a>
+              </div>
+            </div>
           </div>
         </div>
         <!-- Headline End -->
@@ -477,11 +490,21 @@
                     mềm</a> phức tạp.
                 </p>
                 <div class="btn-group about-descr__btnholder animate-in-up">
-                  <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent" href="assets/CV_VoTrungNhan.pdf"
-                    download="CV_VoTrungNhan.pdf">
-                    <span class="btn-caption">Tải CV</span>
-                    <i class="ph fw-bold ph-download-simple"></i>
-                  </a>
+                  <div class="cv-dropdown">
+                    <a class="btn mobile-vertical btn-default btn-hover btn-hover-accent cv-dropdown__toggle"
+                      href="#cv">
+                      <span class="btn-caption">Tải CV</span>
+                      <i class="ph fw-bold ph-download-simple"></i>
+                    </a>
+                    <div class="cv-dropdown__menu">
+                      <a class="cv-option" data-lang="vi" href="assets/CV_Vietnamese.pdf" download>
+                        Vietnamese
+                      </a>
+                      <a class="cv-option" data-lang="en" href="assets/CV_English.pdf" download>
+                        English
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
               <!-- About Me Description End -->
