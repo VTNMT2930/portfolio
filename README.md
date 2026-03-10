@@ -4,7 +4,7 @@
 
 ## 📸 Demo
 
-🔗 **Live Demo:** [https://vtnmt2930.github.io/portfolio](https://vtnmt2930.github.io/portfolio)
+🔗 **Live Demo:** [https://nhanit.io.vn/](https://nhanit.io.vn/)
 
 ![Portfolio Preview](https://via.placeholder.com/800x400?text=Portfolio+Screenshot)
 
@@ -224,10 +224,11 @@ emailjs.send("service_id", "template_id", {
 - 📧 Email: [nhantrung297@gmail.com](mailto:nhantrung297@gmail.com)
 - 💼 LinkedIn: [https://www.linkedin.com/in/vtn2907/](https://www.linkedin.com/in/vtn2907/)
 - 🐙 GitHub: [@VTNMT2930](https://github.com/VTNMT2930)
-- 🌐 Portfolio: [vtnmt2930.github.io/portfolio](https://vtnmt2930.github.io/portfolio)
+- 🌐 Portfolio: [https://nhanit.io.vn/](https://nhanit.io.vn/)
 
 ---
 
 <div align="center">
   <sub>Built with ❤️ by Võ Trung Nhân</sub>
 </div>
+
