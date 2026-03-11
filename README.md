@@ -231,6 +231,8 @@ emailjs.send("service_id", "template_id", {
 ---
 
 <div align="center">
-  <sub>Built with ❤️ by Võ Trung Nhân</sub>
+  <p>Made with ❤️ by Nhân IT</p>
+  <p>⭐ Star this repo if you find it helpful!</p>
 </div>
+
 
