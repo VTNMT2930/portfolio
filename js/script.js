@@ -1232,16 +1232,18 @@ class AlexWalkerPortfolio {
         'portfolio.title': 'Dự án cá nhân',
         'portfolio.1.title': 'HỆ THỐNG TMĐT TEMPLATE SHOP',
         'portfolio.1.desc': 'Chịu trách nhiệm thiết kế, phát triển và triển khai toàn bộ hệ thống cho một website thương mại điện tử, từ giao diện người dùng đến logic nghiệp vụ phía server.',
-        'portfolio.2.title': 'WEBSITE GIỚI THIỆU CÔNG TY NỘI THẤT ĐÌNH VĂN',
-        'portfolio.2.desc': 'Thiết kế và phát triển website giới thiệu sản phẩm và dịch vụ của công ty nội thất, tập trung vào giao diện responsive và trải nghiệm người dùng.',
+        'portfolio.2.title': 'TICKETFLOW - QUẢN LÝ SỰ KIỆN & VÉ TRỰC TUYẾN',
+        'portfolio.2.desc': 'Nền tảng đặt vé sự kiện hiện đại với kiến trúc serverless trên AWS. Tích hợp xác thực Cognito (User/Admin pools), quét vé QR code, gửi email tự động qua SES/SQS. Sử dụng DynamoDB single-table design, API Gateway và Lambda functions. Frontend React với Vite, TailwindCSS, và triển khai trên CloudFront CDN.',
         'portfolio.3.title': 'HỆ THỐNG RÚT GỌN URL',
         'portfolio.3.desc': 'Xây dựng hệ thống API cho phép người dùng rút gọn các URL dài thành đường dẫn ngắn gọn, duy nhất. Thiết kế cơ sở dữ liệu với PostgreSQL để lưu trữ và quản lý hiệu quả các cặp URL. Sử dụng Docker để container hóa ứng dụng, đảm bảo tính nhất quán khi triển khai.',
-        'portfolio.4.title': 'TRANG WEB PORTFOLIO CÁ NHÂN',
-        'portfolio.4.desc': 'Phát triển trang web portfolio cá nhân để giới thiệu các dự án, kỹ năng và thông tin chuyên môn. Thiết kế tập trung vào UI sạch sẽ, hiện đại và UX responsive.',
+        'portfolio.4.title': 'WEBSITE GIỚI THIỆU CÔNG TY NỘI THẤT ĐÌNH VĂN',
+        'portfolio.4.desc': 'Thiết kế và phát triển website giới thiệu sản phẩm và dịch vụ của công ty nội thất, tập trung vào giao diện responsive và trải nghiệm người dùng.',
+        'portfolio.5.title': 'REALTIME DATA PLATFORM - HỆ THỐNG DỮ LIỆU THỜI GIAN THỰC',
+        'portfolio.5.desc': 'Hệ thống xử lý và truyền tải dữ liệu thời gian thực với Apache Kafka, WebSocket và Vue.js. Producer/Consumer management, topic configuration, real-time broadcasting. Dashboard analytics với search & pagination. Deploy với Docker Compose và AWS EC2 ready.',
 
         'about.subtitle': 'Về Bản Thân',
         'about.title': 'Mục tiêu nghề nghiệp',
-        'about.p1': 'Là sinh viên năm cuối chuyên ngành Công nghệ kỹ thuật phần mềm, em có định hướng phát triển sự nghiệp lâu dài với vị trí lập trình viên Backend. Với kiến thức nền tảng vững chắc về Java, Spring Boot và cơ sở dữ liệu, kết hợp với kinh nghiệm thực tiễn qua các dự án cá nhân, em mong muốn được áp dụng kiến thức vào môi trường làm việc chuyên nghiệp.',
+        'about.p1': 'Tốt nghiệp chuyên ngành Công nghệ Kỹ thuật Phần mềm, định hướng Backend Developer. Có kiến thức về Java, Spring Boot và cơ sở dữ liệu. Mong muốn tham gia phát triển các hệ thống backend trong môi trường chuyên nghiệp để nâng cao kỹ năng và tích lũy kinh nghiệm thực tế.',
         'about.p2': 'Em hướng tới mục tiêu không ngừng học hỏi, đóng góp và phát triển để trở thành một Backend Developer vững mạnh, có khả năng xây dựng và tối ưu hóa các hệ thống phần mềm phức tạp.',
 
         'about.info.fullname.label': 'Họ tên',
@@ -1262,7 +1264,7 @@ class AlexWalkerPortfolio {
         'resume.title': 'Học vấn',
         'resume.edu1.title': 'Công nghệ kỹ thuật phần mềm',
         'resume.edu1.school': 'Trường Đại học Nguyễn Tất Thành',
-        'resume.edu1.desc': 'Là sinh viên năm cuối với điểm GPA hiện tại là 3.54/4.0, tập trung vào phát triển ứng dụng web và hệ thống backend.',
+        'resume.edu1.desc': 'GPA: 3.56/4.0',
         'resume.tools.title': 'Công nghệ và công cụ',
 
         'achievements.1': 'Khách hàng hài lòng',
@@ -1287,7 +1289,7 @@ class AlexWalkerPortfolio {
         'modal.tech': 'Công nghệ:',
         'modal.time': 'Thời gian:',
         'modal.role': 'Vai trò:',
-        'modal.demo': 'Xem Demo',
+        'modal.demo': 'Xem Website',
         'modal.github': 'GitHub'
       },
       en: {
@@ -1313,16 +1315,18 @@ class AlexWalkerPortfolio {
         'portfolio.title': 'Personal projects',
         'portfolio.1.title': 'E-COMMERCE SYSTEM TEMPLATE SHOP',
         'portfolio.1.desc': 'Designed, developed, and deployed a full-stack e-commerce website, from UI to server-side business logic.',
-        'portfolio.2.title': 'FURNITURE COMPANY WEBSITE',
-        'portfolio.2.desc': 'Designed and developed a company website to showcase products and services with responsive UI and UX focus.',
+        'portfolio.2.title': 'TICKETFLOW - EVENT MANAGEMENT & TICKETING PLATFORM',
+        'portfolio.2.desc': 'Modern event ticketing platform with AWS serverless architecture. Integrated Cognito authentication (User/Admin pools), QR code ticket scanning, automated email via SES/SQS. Utilizing DynamoDB single-table design, API Gateway and Lambda functions. React frontend with Vite, TailwindCSS, deployed on CloudFront CDN.',
         'portfolio.3.title': 'URL SHORTENER SYSTEM',
         'portfolio.3.desc': 'Built APIs to shorten long URLs to unique short links. Designed the database with PostgreSQL and containerized the app with Docker.',
-        'portfolio.4.title': 'PERSONAL PORTFOLIO WEBSITE',
-        'portfolio.4.desc': 'Developed a personal portfolio website to showcase projects, skills, and expertise with a clean UI and responsive UX.',
+        'portfolio.4.title': 'FURNITURE COMPANY WEBSITE',
+        'portfolio.4.desc': 'Designed and developed a company website to showcase products and services with responsive UI and UX focus.',
+        'portfolio.5.title': 'REALTIME DATA PLATFORM',
+        'portfolio.5.desc': 'Real-time data streaming platform with Apache Kafka, WebSocket and Vue.js. Producer/Consumer management, topic configuration, real-time broadcasting. Dashboard analytics with search & pagination. Deployed with Docker Compose, AWS EC2 ready.',
 
         'about.subtitle': 'About Me',
         'about.title': 'Career Objective',
-        'about.p1': 'I am a final-year student majoring in Software Engineering Technology, aiming to build a long-term career as a Backend Developer. With a solid foundation in Java, Spring Boot, and databases, combined with hands-on experience from personal projects, I am eager to contribute in a professional environment.',
+        'about.p1': 'Software Engineering graduate with a strong interest in Backend Development. Skilled in Java, Spring Boot, and database systems. Seeking an opportunity to develop backend systems in a professional environment while enhancing technical skills and gaining practical experience.',
         'about.p2': 'I continuously strive to learn, contribute, and grow into a strong Backend Developer capable of building and optimizing complex software systems.',
 
         'about.info.fullname.label': 'Full name',
@@ -1343,7 +1347,7 @@ class AlexWalkerPortfolio {
         'resume.title': 'Education',
         'resume.edu1.title': 'Software Engineering Technology',
         'resume.edu1.school': 'Nguyen Tat Thanh University',
-        'resume.edu1.desc': 'Final-year student with a GPA of 3.54/4.0, focusing on web apps and backend systems.',
+        'resume.edu1.desc': 'GPA: 3.56/4.0',
         'resume.tools.title': 'Technologies and tools',
 
         'achievements.1': 'Happy clients',
@@ -1368,7 +1372,7 @@ class AlexWalkerPortfolio {
         'modal.tech': 'Tech stack:',
         'modal.time': 'Duration:',
         'modal.role': 'Role:',
-        'modal.demo': 'View Demo',
+        'modal.demo': 'View Website',
         'modal.github': 'GitHub'
       }
     };
@@ -1430,13 +1434,15 @@ class AlexWalkerPortfolio {
         dict['portfolio.1.title'],
         dict['portfolio.2.title'],
         dict['portfolio.3.title'],
-        dict['portfolio.4.title']
+        dict['portfolio.4.title'],
+        dict['portfolio.5.title']
       ];
       const projDescs = [
         dict['portfolio.1.desc'],
         dict['portfolio.2.desc'],
         dict['portfolio.3.desc'],
-        dict['portfolio.4.desc']
+        dict['portfolio.4.desc'],
+        dict['portfolio.5.desc']
       ];
       document.querySelectorAll('#portfolio figure .gallery__descr h5').forEach((h5, idx) => {
         if (projTitles[idx]) h5.textContent = projTitles[idx];

@@ -3015,9 +3015,7 @@ form textarea:required:valid {
   margin-bottom: 1.4rem;
 }
 
-.content__block.block-large {
-  margin-bottom: 11rem;
-}
+.content__block.block-large {}
 
 .content__block.block-grid-large {
   margin-bottom: 10rem;
@@ -3032,9 +3030,7 @@ form textarea:required:valid {
     margin-bottom: 1.9rem;
   }
 
-  .content__block.block-large {
-    margin-bottom: 13rem;
-  }
+  .content__block.block-large {}
 
   .content__block.block-grid-large {
     margin-bottom: 13rem;
@@ -3056,9 +3052,7 @@ form textarea:required:valid {
     margin-bottom: 0.4rem;
   }
 
-  .content__block.block-large {
-    margin-bottom: 14.6rem;
-  }
+  .content__block.block-large {}
 
   .content__block.block-grid-large {
     margin-bottom: 15rem;
@@ -3070,9 +3064,7 @@ form textarea:required:valid {
     margin-bottom: 5.3rem;
   }
 
-  .content__block.block-large {
-    margin-bottom: 15.6rem;
-  }
+  .content__block.block-large {}
 }
 
 .section-h3 {
